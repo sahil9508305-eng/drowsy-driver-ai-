@@ -13,5 +13,25 @@
     <h1>Drowsiness Detection</h1>
     <video id="video" autoplay playsinline></video>
     <audio id="alarm" src="alarm.mp3" loop></audio>
+ड दिया गया है, इसे आप कॉपी कर सकते हैं: ```html
+<script>
+const video = document.getElementById("video");
+const alarm = document.getElementById("alarm");
+async function setupCamera() {
+try {
+const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+video.srcObject = stream;
+return new Promise((resolve) => {
+video.onloadedmetadata = () => {
+resolve(video);
+};
+});
+} catch (err) {
+console.error("Error accessing webcam: ", err);
+alert("Please allow webcam access to use this app.");
+}
+}
+setupCamera();
+</script>
 </body>
 </html>
